@@ -15,7 +15,8 @@ from keras.preprocessing import sequence
 
 import matplotlib.pyplot as plt
 plt.close('all')
-trainset = pd.read_csv('exotrain.csv')
+trainset = pd.read_csv('exoTrain.csv')
+testset = pd.read_csv('exoTest.csv')
 
 """
 t = range(0, 3198)
@@ -29,8 +30,11 @@ five = trainset[:5]
 """
 
 # split dataframe by label (excluding label column)
-label1 = trainset.loc[trainset['LABEL'] == 1].drop(['LABEL'], axis=1)
-label2 = trainset.loc[trainset['LABEL'] == 2].drop(['LABEL'], axis=1)
+train1 = trainset.loc[trainset['LABEL'] == 1].drop(['LABEL'], axis=1)
+train2 = trainset.loc[trainset['LABEL'] == 2].drop(['LABEL'], axis=1)
+
+test1 = testset.loc[testset['LABEL'] == 1].drop(['LABEL'], axis=1)
+test2 = testset.loc[testset['LABEL'] == 2].drop(['LABEL'], axis=1)
 
 #model = Sequential()
 #model.add(Embedding())
