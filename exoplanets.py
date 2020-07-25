@@ -6,6 +6,9 @@ by Isaac Shure
 import pandas as pd
 import numpy as np
 
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import LSTM
@@ -30,10 +33,22 @@ five = trainset[:5]
 """
 
 # split dataframes into x and y components
-trainy = trainset[['LABEL']]
-trainx = trainset.drop(['LABEL'], axis=1)
+y_train = trainset[['LABEL']]
+x_train = trainset.drop(['LABEL'], axis=1)
 
-testy = testset[['LABEL']]
-testx = trainset.drop(['LABEL'], axis=1)
-#model = Sequential()
-#model.add(Embedding())
+y_test = testset[['LABEL']]
+x_test = testset.drop(['LABEL'], axis=1)
+
+# use logistic regression to predict exoplanets
+# score: 0.50877 (model did not converge)
+
+# use random forest to predict exoplanets
+model = RandomForestClassifier()
+model.fit(x_train, y_train.values.ravel())
+predictions = model.predict(x_test)
+score = model.score(x_test, y_test.values.ravel())
+
+"""
+model = Sequential()
+model.add(Embedding())
+"""
