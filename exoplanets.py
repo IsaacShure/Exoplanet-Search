@@ -29,12 +29,11 @@ ax.legend()
 five = trainset[:5]
 """
 
-# split dataframe by label (excluding label column)
-train1 = trainset.loc[trainset['LABEL'] == 1].drop(['LABEL'], axis=1)
-train2 = trainset.loc[trainset['LABEL'] == 2].drop(['LABEL'], axis=1)
+# split dataframes into x and y components
+trainy = trainset[['LABEL']]
+trainx = trainset.drop(['LABEL'], axis=1)
 
-test1 = testset.loc[testset['LABEL'] == 1].drop(['LABEL'], axis=1)
-test2 = testset.loc[testset['LABEL'] == 2].drop(['LABEL'], axis=1)
-
+testy = testset[['LABEL']]
+testx = trainset.drop(['LABEL'], axis=1)
 #model = Sequential()
 #model.add(Embedding())
